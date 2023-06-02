@@ -1,0 +1,17 @@
+name: example
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.0.1+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  json_to_csv:
+    path: ../
+
+json_to_csv:
+  files_path: 'assets/json/'
+  main_file: 'assets/json/en.json'
+  output_file: 'assets/test.csv'
+  csv_delimiter: ';'
