@@ -36,11 +36,28 @@ Firstly, add the package as a dev dependency:
 ```yaml   
 dev_dependencies: 
   json_to_csv:
+    git:
+      url: https://github.com/defuncart/json_to_csv
 ```
 
 ### Define Settings
 
-Next define arb_generator package settings in `pubspec.yaml`.
+Settings can either be defined as command line arguments or in `pubspec.yaml`.
+
+| Setting            | Description                                                                 |
+| ------------------ | ----------------------------------------------------------------------------|
+| files_path         | A path to folder containing json files.                                     |
+| main_file          | A path to folder containing main json file (i.e. en.json).                  |
+| output_file        | A path to save the generated csv file.                                      |
+| csv_delimiter      | A delimiter to separate columns in the input CSV file. Defaults to `;`.     |
+
+#### Command Line Arguments
+
+```sh
+dart run json_to_csv --files_path="assets/json/" --main_file="assets/json/en.json" --output_file="assets/test.csv" --csv_delimiter=";"
+```
+
+#### pubspec.yaml
 
 ```yaml
 json_to_csv:
@@ -50,27 +67,30 @@ json_to_csv:
   csv_delimiter: ';'
 ```
 
-| Setting            | Description                                                                 |
-| ------------------ | ----------------------------------------------------------------------------|
-| files_path         | A path to folder containing json files.                                     |
-| main_file          | A path to folder containing main json file (i.e. en.json).                  |
-| output_file        | A path to save the generated csv file.                                      |
-| csv_delimiter      | A delimiter to separate columns in the input CSV file. Defaults to `;`.     |
-
 ### Run package
 
-Ensure that your current working directory is the project root. Depending on your project, run one of the following commands:
+Ensure that your current working directory is the project root, then run the following command:
 
 ```sh
 dart run json_to_csv
 ```
 
-or
+#### Global Activation
+
+The package can be global activated and used as a cli tool as follows:
 
 ```sh
-flutter pub run json_to_csv
+dart pub global activate -sgit https://github.com/defuncart/json_to_csv
+
+json_to_csv --files_path="assets/json/" --main_file="assets/json/en.json" --output_file="assets/test.csv" --csv_delimiter=";"
+```
+
+The package can be deactivated as follows:
+
+```sh
+dart pub global deactivate json_to_csv
 ```
 
 ## Collaboration
 
-Spotted any issues? Please open [an issue on GitHub](https://github.com/defuncart/arb_generator/issues)! Would like to contribute a new language or feature? Fork the repo and submit a PR!
+Spotted any issues? Please open [an issue on GitHub](https://github.com/defuncart/json_to_csv/issues)! Would like to contribute a new feature? Fork the repo and submit a PR!

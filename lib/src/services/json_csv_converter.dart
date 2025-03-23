@@ -37,9 +37,12 @@ class JsonCSVConverter {
     sb.write(settings.csvDelimiter);
     sb.write(p.basenameWithoutExtension(mainFile.path));
     sb.write(settings.csvDelimiter);
-    for (final file in remainingFiles) {
+    for (final (index, file) in remainingFiles.indexed) {
       sb.write(p.basenameWithoutExtension(file.path));
-      sb.write(settings.csvDelimiter);
+      // do not add delimited after final column
+      if (index < remainingFiles.length - 1) {
+        sb.write(settings.csvDelimiter);
+      }
     }
     sb.writeln();
 
@@ -49,10 +52,13 @@ class JsonCSVConverter {
       sb.write(settings.csvDelimiter);
       sb.write(kvp.value);
       sb.write(settings.csvDelimiter);
-      for (final json in remainingFilesJson) {
+      for (final (index, json) in remainingFilesJson.indexed) {
         if (json.containsKey(key)) {
           sb.write(json[key]);
-          sb.write(settings.csvDelimiter);
+          // do not add delimited after final column
+          if (index < remainingFilesJson.length - 1) {
+            sb.write(settings.csvDelimiter);
+          }
         }
       }
       sb.writeln();
